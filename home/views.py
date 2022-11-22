@@ -301,7 +301,8 @@ def pay(request):
     if request.method == 'POST':
         api_key = 'sk_test_fb7fa21d8975a472277ac9251d89f6935dbf1365'
         curl = 'https://api.paystack.co/transaction/initialize'
-        cburl = 'http://127.0.0.1:8900/callback/'
+        cburl = 'http://3.86.245.19/callback/'
+        # cburl = 'http://127.0.0.1:8900/callback/'
         ref = str(uuid.uuid4())
         profile = Profile.objects.get(user__username = request.user.username)
         shop_code = profile.id
@@ -370,6 +371,7 @@ def search(request):
     else:
         return render(request, 'search.html')
 
+@login_required(login_url='signin')
 def history(request):
     profile = Profile.objects.get(user__username =request.user.username)
     trolley = Cart.objects.filter(user__username = request.user.username)
